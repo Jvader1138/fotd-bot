@@ -1,0 +1,23 @@
+{
+  "name": "fotd-bot",
+  "version": "1.0.0",
+  "description": "A Discord bot for determing the flavor of the day",
+  "license": "GPL-3.0",
+  "author": "Jvader1138",
+  "type": "commonjs",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.mjs",
+    "build": "tsdown src/index.ts --minify"
+  },
+  "dependencies": {
+    "discord.js": "^14.26.4",
+    "dotenv": "^17.4.2"
+  },
+  "devDependencies": {
+    "tsdown": "^0.22.1",
+    "tsx": "^4.22.3",
+    "typescript": "^6.0.3"
+  }
+}
