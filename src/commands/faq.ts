@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from 'discord.js';
 import { Command } from '../types/Command';
 
-const pingCommand: Command = {
+const faqCommand: Command = {
   data: new SlashCommandBuilder()
     .setName('faq')
     .setDescription('Frequently Asked Questions'),
@@ -11,4 +11,4 @@ const pingCommand: Command = {
   },
 };
 
-export default pingCommand;
+export default faqCommand;
