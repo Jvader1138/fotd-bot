@@ -11,22 +11,37 @@ type DeployCommandsProps = {
 };
 
 export async function deployCommandsToAllGuilds(client: Client) {
-  if (config.NODE_ENV === 'prod') return;
-  
-  for (const [, guild] of client.guilds.cache) {
+  if (config.NODE_ENV === 'prod') {
     try {
-      console.log(`Deploying commands to ${guild.name}`);
+      console.log('Deploying commands to globally');
 
       await rest.put(
-        Routes.applicationGuildCommands(config.DISCORD_CLIENT_ID, guild.id),
+        Routes.applicationCommands(config.DISCORD_CLIENT_ID),
         {
           body: commandsData,
         }
       );
 
-      console.log(`Updated commands for ${guild.name}`);
+      console.log('Updated commands to globally');
     } catch (error) {
-      console.error(`Failed deploying to guild ${guild.id}`, error);
+      console.error('Failed deploying commands to globally', error);
+    }
+  } else {
+    for (const [, guild] of client.guilds.cache) {
+      try {
+        console.log(`Deploying commands to ${guild.name}`);
+
+        await rest.put(
+          Routes.applicationGuildCommands(config.DISCORD_CLIENT_ID, guild.id),
+          {
+            body: commandsData,
+          }
+        );
+
+        console.log(`Updated commands for ${guild.name}`);
+      } catch (error) {
+        console.error(`Failed deploying to guild ${guild.id}`, error);
+      }
     }
   }
 }
